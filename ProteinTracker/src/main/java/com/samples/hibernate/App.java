@@ -5,6 +5,8 @@ import org.hibernate.Session;
 
 public class App {
     public static void main(String[] args) {
+
+        // just throws Log to console.
         BasicConfigurator.configure();
 
         Session session = HibernateUtilities.getSessionFactory().openSession();
