@@ -10,7 +10,16 @@ public class App {
         BasicConfigurator.configure();
 
         Session session = HibernateUtilities.getSessionFactory().openSession();
-        System.out.println("Hello World!");
+        session.beginTransaction();
+
+        User user = new User();
+        user.setUsername("Joe");
+        user.setGoal(250);
+
+        session.save(user);
+
+        session.getTransaction().commit();
         session.close();
+        HibernateUtilities.getSessionFactory().close();
     }
 }

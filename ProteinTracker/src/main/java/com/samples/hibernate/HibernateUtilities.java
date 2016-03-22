@@ -37,6 +37,9 @@ public class HibernateUtilities {
             props.setProperty(HIBERNATE_FORMAT_SQL, TRUE.toString());
 
             configuration.setProperties(props);
+
+            configuration.addPackage("com.samples.hibernate");
+
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (HibernateException he){
