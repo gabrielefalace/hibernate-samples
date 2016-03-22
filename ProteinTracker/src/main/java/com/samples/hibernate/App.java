@@ -13,8 +13,8 @@ public class App {
         session.beginTransaction();
 
         User user = new User();
-        user.setUsername("Joe");
-        user.setGoal(250);
+        user.setUsername("Jack");
+        user.setGoal(320);
 
         session.save(user);
 

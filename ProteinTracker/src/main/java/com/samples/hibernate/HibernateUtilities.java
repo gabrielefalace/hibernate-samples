@@ -38,7 +38,7 @@ public class HibernateUtilities {
 
             configuration.setProperties(props);
 
-            configuration.addPackage("com.samples.hibernate");
+            configuration.addAnnotatedClass(User.class);
 
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
