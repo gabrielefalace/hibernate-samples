@@ -6,13 +6,14 @@ import org.apache.log4j.LogManager;
 import org.hibernate.Session;
 
 import java.util.Date;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
 
         // just throws Log to console.
         BasicConfigurator.configure();
-        LogManager.getRootLogger().setLevel(Level.DEBUG);
+        LogManager.getRootLogger().setLevel(Level.INFO);
 
         Session session = HibernateUtilities.getSessionFactory().openSession();
 
@@ -30,19 +31,19 @@ public class App {
 
 
         // Second Transaction
-        /*
+
         session.beginTransaction();
 
         User loadedUser = (User) session.load(User.class, 1);
-        for(UserHistory history: loadedUser.getHistory()){
-            System.out.println(history.getEntryTime());
+        for(Map.Entry<String, UserHistory> history: loadedUser.getHistory().entrySet()){
+            System.out.println(history.getValue().getEntryTime());
         }
 
         loadedUser.getProteinData().setTotal(loadedUser.getProteinData().getTotal() + 20);
-        loadedUser.getHistory().add(new UserHistory(new Date(), "Added 20 points"));
+        loadedUser.getHistory().put("efergt", new UserHistory(new Date(), "Added 20 points"));
 
         session.getTransaction().commit();
-        */
+
 
         session.close();
         HibernateUtilities.getSessionFactory().close();
