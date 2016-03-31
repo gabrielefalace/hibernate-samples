@@ -1,6 +1,8 @@
 package com.samples.hibernate;
 
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.hibernate.Session;
 
 import java.util.Date;
@@ -10,6 +12,8 @@ public class App {
 
         // just throws Log to console.
         BasicConfigurator.configure();
+        LogManager.getRootLogger().setLevel(Level.DEBUG);
+
         Session session = HibernateUtilities.getSessionFactory().openSession();
 
         // First Transaction
