@@ -1,6 +1,9 @@
 package com.samples.hibernate;
 
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -14,12 +17,12 @@ public class User {
     @Column(name = "name")
     private String username;
 
-    @Column(name = "total")
-    private int total;
+    @ElementCollection
+    @CollectionTable(name = "User_History", joinColumns = @JoinColumn(name = "id"))
+    private Set<UserHistory> history = new HashSet<UserHistory>();
 
-    @Column(name = "goal")
-    private int goal;
-
+    @Embedded
+    ProteinData proteinData = new ProteinData();
 
     public int getId() {
         return id;
@@ -37,20 +40,19 @@ public class User {
         this.username = username;
     }
 
-    public int getTotal() {
-        return total;
+    public ProteinData getProteinData() {
+        return proteinData;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setProteinData(ProteinData proteinData) {
+        this.proteinData = proteinData;
     }
 
-    public int getGoal() {
-        return goal;
+    public Set<UserHistory> getHistory() {
+        return history;
     }
 
-    public void setGoal(int goal) {
-        this.goal = goal;
+    public void setHistory(Set<UserHistory> history) {
+        this.history = history;
     }
-
 }

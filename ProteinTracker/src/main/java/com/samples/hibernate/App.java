@@ -3,22 +3,41 @@ package com.samples.hibernate;
 import org.apache.log4j.BasicConfigurator;
 import org.hibernate.Session;
 
+import java.util.Date;
+
 public class App {
     public static void main(String[] args) {
 
         // just throws Log to console.
         BasicConfigurator.configure();
-
         Session session = HibernateUtilities.getSessionFactory().openSession();
+
+        // First Transaction
         session.beginTransaction();
 
         User user = new User();
-        user.setUsername("Jack");
-        user.setGoal(320);
+        user.setUsername("Rick");
+        user.getProteinData().setGoal(219);
 
+        user.getHistory().add(new UserHistory(new Date(), "Set  the Goal to 219"));
         session.save(user);
 
         session.getTransaction().commit();
+
+
+        // Second Transaction
+        session.beginTransaction();
+
+        User loadedUser = (User) session.load(User.class, 1);
+        for(UserHistory history: loadedUser.getHistory()){
+            System.out.println(history.getEntryTime());
+        }
+
+        loadedUser.getProteinData().setTotal(loadedUser.getProteinData().getTotal() + 20);
+        loadedUser.getHistory().add(new UserHistory(new Date(), "Added 20 points"));
+
+        session.getTransaction().commit();
+
         session.close();
         HibernateUtilities.getSessionFactory().close();
     }
