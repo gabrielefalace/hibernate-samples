@@ -36,6 +36,8 @@ public class HibernateUtilities {
             props.setProperty(HIBERNATE_SHOW_SQL, TRUE.toString());
             props.setProperty(HIBERNATE_FORMAT_SQL, TRUE.toString());
 
+            // props.setProperty("hbm2ddl", "create");
+
             configuration.setProperties(props);
 
             configuration.addAnnotatedClass(User.class);

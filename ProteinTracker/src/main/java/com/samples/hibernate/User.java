@@ -2,8 +2,8 @@ package com.samples.hibernate;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "Users")
@@ -17,9 +17,11 @@ public class User {
     @Column(name = "name")
     private String username;
 
-    @ElementCollection
+
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "User_History", joinColumns = @JoinColumn(name = "id"))
-    private Set<UserHistory> history = new HashSet<UserHistory>();
+    @MapKeyColumn(name = "ENTRY_IDENTIFIER")
+    private Map<String, UserHistory> history = new HashMap<String, UserHistory>();
 
     @Embedded
     ProteinData proteinData = new ProteinData();
@@ -48,11 +50,11 @@ public class User {
         this.proteinData = proteinData;
     }
 
-    public Set<UserHistory> getHistory() {
+    public Map<String, UserHistory> getHistory() {
         return history;
     }
 
-    public void setHistory(Set<UserHistory> history) {
+    public void setHistory(Map<String, UserHistory> history) {
         this.history = history;
     }
 }
