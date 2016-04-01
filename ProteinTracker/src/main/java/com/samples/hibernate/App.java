@@ -29,7 +29,7 @@ public class App {
         session.getTransaction().commit();
 
         // Second Transaction
-        /*session.beginTransaction();
+        session.beginTransaction();
 
         User loadedUser = (User) session.load(User.class, 1);
         for(UserHistory history: loadedUser.getHistory()){
@@ -40,7 +40,7 @@ public class App {
         loadedUser.addHistory(new UserHistory(new Date(), "Added 20 points"));
 
         session.getTransaction().commit();
-        */
+
 
         session.close();
         HibernateUtilities.getSessionFactory().close();
