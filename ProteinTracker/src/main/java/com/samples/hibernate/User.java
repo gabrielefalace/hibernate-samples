@@ -1,13 +1,13 @@
 package com.samples.hibernate;
 
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -17,9 +17,9 @@ public class User {
     @Column(name = "name")
     private String username;
 
-    @ElementCollection
-    @CollectionTable(name = "User_History", joinColumns = @JoinColumn(name = "id"))
-    private Set<UserHistory> history = new HashSet<UserHistory>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="id")
+    private List<UserHistory> history = new ArrayList<UserHistory>();
 
     @Embedded
     ProteinData proteinData = new ProteinData();
@@ -48,11 +48,18 @@ public class User {
         this.proteinData = proteinData;
     }
 
-    public Set<UserHistory> getHistory() {
+    public List<UserHistory> getHistory() {
         return history;
     }
 
-    public void setHistory(Set<UserHistory> history) {
+    public void setHistory(List<UserHistory> history) {
         this.history = history;
+    }
+
+    public void addHistory(UserHistory userHistory){
+        // first set the reference for the other object
+        // userHistory.setUser(this);
+        // then actually add to the list
+        history.add(userHistory);
     }
 }
