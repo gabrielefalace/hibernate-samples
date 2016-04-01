@@ -21,8 +21,14 @@ public class User {
     @CollectionTable(name = "User_History", joinColumns = @JoinColumn(name = "id"))
     private Set<UserHistory> history = new HashSet<UserHistory>();
 
-    @Embedded
-    ProteinData proteinData = new ProteinData();
+    // 1) not embedded anymore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    ProteinData proteinData;
+
+    // 2) constructor using setter
+    public User(){
+       setProteinData(new ProteinData());
+    }
 
     public int getId() {
         return id;
@@ -44,8 +50,10 @@ public class User {
         return proteinData;
     }
 
+    // 3) setter setting up the reciprocal reference
     public void setProteinData(ProteinData proteinData) {
         this.proteinData = proteinData;
+        proteinData.setUser(this);
     }
 
     public Set<UserHistory> getHistory() {
