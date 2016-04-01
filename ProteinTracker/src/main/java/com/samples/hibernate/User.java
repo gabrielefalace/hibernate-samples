@@ -18,7 +18,7 @@ public class User implements Serializable {
     private String username;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @JoinColumn(name="user_history_id")
     private List<UserHistory> history = new ArrayList<UserHistory>();
 
     @Embedded

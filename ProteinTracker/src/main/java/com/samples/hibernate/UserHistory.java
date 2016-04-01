@@ -9,7 +9,7 @@ import java.util.Date;
 public class UserHistory implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "user_history_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
 
