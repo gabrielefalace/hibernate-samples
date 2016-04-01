@@ -17,8 +17,7 @@ public class User implements Serializable {
     @Column(name = "name")
     private String username;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_history_id")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UserHistory> history = new ArrayList<UserHistory>();
 
     @Embedded
@@ -58,7 +57,7 @@ public class User implements Serializable {
 
     public void addHistory(UserHistory userHistory){
         // first set the reference for the other object
-        // userHistory.setUser(this);
+        userHistory.setUser(this);
         // then actually add to the list
         history.add(userHistory);
     }

@@ -19,6 +19,11 @@ public class UserHistory implements Serializable {
     @Column(name = "entry")
     private String entry;
 
+
+    @ManyToOne
+    @JoinColumn(name = "user_fk", nullable = false)
+    private User user;
+
     public UserHistory(){}
 
     public UserHistory(Date entryTime, String entry) {
@@ -52,5 +57,11 @@ public class UserHistory implements Serializable {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
