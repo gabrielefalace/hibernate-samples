@@ -23,3 +23,18 @@ create table Protein_Data (
 	goal INT NOT NULL DEFAULT 100,
     PRIMARY KEY (protein_id)
 );
+
+
+create table Goal_Alert (
+	goal_id INT NOT NULL AUTO_INCREMENT,
+	message VARCHAR(100),
+    primary key (goal_id)
+);
+
+create table User_GoalAlert (
+	user_fk INT not null,
+	goal_alert_fk INT not null,
+	primary key (user_fk, goal_alert_fk),
+	constraint foreign key (user_fk) references Users(id),
+	constraint foreign key (goal_alert_fk) references Goal_Alert(goal_id)
+);
