@@ -10,7 +10,7 @@ public class UserHistory implements Serializable {
 
     @Id
     @Column(name = "user_history_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "entry_time")

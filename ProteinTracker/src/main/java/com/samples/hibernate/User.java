@@ -11,7 +11,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
@@ -20,14 +20,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UserHistory> history = new ArrayList<UserHistory>();
 
-    // 1) not embedded anymore
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    ProteinData proteinData;
-
-    // 2) constructor using setter
-    public User(){
-       setProteinData(new ProteinData());
-    }
+    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "protein_id", nullable = false)
+    ProteinData proteinData = new ProteinData();
 
     public int getId() {
         return id;
@@ -49,10 +44,8 @@ public class User implements Serializable {
         return proteinData;
     }
 
-    // 3) setter setting up the reciprocal reference
     public void setProteinData(ProteinData proteinData) {
         this.proteinData = proteinData;
-        proteinData.setUser(this);
     }
 
     public List<UserHistory> getHistory() {

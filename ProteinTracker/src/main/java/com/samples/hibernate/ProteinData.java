@@ -7,19 +7,33 @@ import javax.persistence.*;
 public class ProteinData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "protein_id")
     private int id;
-
-    @OneToOne(optional = false)
-    @PrimaryKeyJoinColumn(name = "user_fk")
-    private User user;
 
     @Column(name = "total")
     private int total;
 
     @Column(name = "goal")
     private int goal;
+
+
+    /*
+    // for bidirectional mapping, just uncomment
+
+    @OneToOne(mappedBy = "proteinData")
+    private User user;
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    */
 
     public int getGoal() {
         return goal;
@@ -45,11 +59,4 @@ public class ProteinData {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
