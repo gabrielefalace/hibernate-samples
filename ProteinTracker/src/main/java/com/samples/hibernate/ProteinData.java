@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class ProteinData {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @Column(name = "protein_id")
     private int id;
 
     @OneToOne(optional = false)
