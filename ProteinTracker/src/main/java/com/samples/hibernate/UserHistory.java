@@ -1,17 +1,28 @@
 package com.samples.hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Embeddable
+@Entity
+@Table(name = "User_History")
 public class UserHistory implements Serializable {
+
+    @Id
+    @Column(name = "user_history_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    private int id;
 
     @Column(name = "entry_time")
     private Date entryTime;
 
+    @Column(name = "entry")
     private String entry;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_fk", nullable = false)
+    private User user;
 
     public UserHistory(){}
 
@@ -37,22 +48,20 @@ public class UserHistory implements Serializable {
         this.entryTime = entryTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        UserHistory that = (UserHistory) o;
-
-        if (entryTime != null ? !entryTime.equals(that.entryTime) : that.entryTime != null) return false;
-        return entry != null ? entry.equals(that.entry) : that.entry == null;
-
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        int result = entryTime != null ? entryTime.hashCode() : 0;
-        result = 31 * result + (entry != null ? entry.hashCode() : 0);
-        return result;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

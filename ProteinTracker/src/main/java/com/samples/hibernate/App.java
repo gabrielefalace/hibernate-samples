@@ -23,11 +23,10 @@ public class App {
         user.setUsername("Rick");
         user.getProteinData().setGoal(219);
 
-        user.getHistory().add(new UserHistory(new Date(), "Set  the Goal to 219"));
+        user.addHistory(new UserHistory(new Date(), "Set  the Goal to 219"));
         session.save(user);
 
         session.getTransaction().commit();
-
 
         // Second Transaction
         session.beginTransaction();
@@ -38,9 +37,10 @@ public class App {
         }
 
         loadedUser.getProteinData().setTotal(loadedUser.getProteinData().getTotal() + 20);
-        loadedUser.getHistory().add(new UserHistory(new Date(), "Added 20 points"));
+        loadedUser.addHistory(new UserHistory(new Date(), "Added 20 points"));
 
         session.getTransaction().commit();
+
 
         session.close();
         HibernateUtilities.getSessionFactory().close();
