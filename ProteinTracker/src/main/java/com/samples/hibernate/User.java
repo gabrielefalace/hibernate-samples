@@ -24,6 +24,23 @@ public class User implements Serializable {
     @JoinColumn(name = "protein_id", nullable = false)
     ProteinData proteinData = new ProteinData();
 
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "User_GoalAlert",
+            joinColumns = @JoinColumn(name = "user_fk"),
+            inverseJoinColumns = @JoinColumn(name = "goal_alert_fk"))
+    private List<GoalAlert> goalAlert;
+
+
+    public List<GoalAlert> getGoalAlert() {
+        return goalAlert;
+    }
+
+    public void setGoalAlert(List<GoalAlert> goalAlert) {
+        this.goalAlert = goalAlert;
+    }
+
+
     public int getId() {
         return id;
     }

@@ -5,7 +5,10 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -24,6 +27,16 @@ public class App {
         user.getProteinData().setGoal(219);
 
         user.addHistory(new UserHistory(new Date(), "Set  the Goal to 219"));
+
+
+        List<GoalAlert> goalAlerts = new ArrayList<GoalAlert>();
+        GoalAlert goalAlert = new GoalAlert("Congratulations");
+        goalAlerts.add(goalAlert);
+
+        user.setGoalAlert(goalAlerts);
+
+
+
         session.save(user);
 
         session.getTransaction().commit();

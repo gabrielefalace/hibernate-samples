@@ -41,6 +41,7 @@ public class HibernateUtilities {
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(UserHistory.class);
             configuration.addAnnotatedClass(ProteinData.class);
+            configuration.addAnnotatedClass(GoalAlert.class);
 
 
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
