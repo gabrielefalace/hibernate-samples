@@ -33,8 +33,10 @@ public class App {
 
         User loadedUser = (User) session.load(User.class, 1);
         for(UserHistory history: loadedUser.getHistory()){
-            System.out.println(history.getEntryTime());
+            System.out.println("\n Entry Time: " + history.getEntryTime());
         }
+
+        System.out.println("User associated to protein is: " + loadedUser.getProteinData().getUser().getUsername());
 
         loadedUser.getProteinData().setTotal(loadedUser.getProteinData().getTotal() + 20);
         loadedUser.addHistory(new UserHistory(new Date(), "Added 20 points"));

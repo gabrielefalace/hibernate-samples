@@ -18,12 +18,11 @@ public class ProteinData {
     private int goal;
 
 
-    /*
-    // for bidirectional mapping, just uncomment
+
+    // for bidirectional mapping
 
     @OneToOne(mappedBy = "proteinData")
     private User user;
-
 
     public User getUser() {
         return user;
@@ -33,7 +32,7 @@ public class ProteinData {
         this.user = user;
     }
 
-    */
+
 
     public int getGoal() {
         return goal;
