@@ -1,7 +1,8 @@
 package com.samples.hibernate;
 
 import javax.persistence.*;
-import javax.swing.text.StringContent;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Goal_Alert")
@@ -14,6 +15,9 @@ public class GoalAlert {
 
     @Column(name = "message")
     private String message;
+
+    @ManyToMany(mappedBy = "goalAlerts")
+    private List<User> users = new ArrayList<User>();
 
     public GoalAlert(){}
 
